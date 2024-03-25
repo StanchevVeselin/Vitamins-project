@@ -6,7 +6,7 @@
   }
   
   .product {
-    width: calc(33.33% - 20px); /* Adjust the width based on the number of products per row */
+    width: calc(33.33% - 20px); 
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
