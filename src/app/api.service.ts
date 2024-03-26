@@ -16,5 +16,9 @@ export class ApiService {
     return this.http.get<Product[]>(`${apiUrl}/data/products`)
   }
 
-  getAllComments () {}
+  getSingleProduct (id: string) {
+    const {apiUrl} = environment
+
+    return this.http.get<Product>(`${apiUrl}/data/products/${id}`)
+  }
 }

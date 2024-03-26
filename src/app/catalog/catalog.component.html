@@ -10,7 +10,10 @@
             <button class="add-to-cart-button">Add to Cart</button>
             <a class="details-button">Details</a>
         </div> -->
-        <app-product-item [product]="product"/>
+        <app-product-item 
+        [product]="product"
+        [routerLink]="['/products','details',product._id]"
+        />
     </div>   
 
   </div>
