@@ -7,11 +7,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home/home.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
 import { DetailsComponent } from './details/details.component'
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,6 @@ import { DetailsComponent } from './details/details.component'
     HomeComponent,
     ProductItemComponent,
     CatalogComponent,
-    LoginComponent,
-    RegisterComponent,
     DetailsComponent,
   ],
   imports: [
@@ -28,7 +25,8 @@ import { DetailsComponent } from './details/details.component'
     AppRoutingModule,
     NgbModule,
     CoreModule,
-    HttpClientModule
+    HttpClientModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
