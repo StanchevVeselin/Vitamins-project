@@ -11,6 +11,6 @@ export class AddComponent {
 
   addComment(ev: Event,emailInput:string, contentInput: string) {
     ev.preventDefault()
-   return this.apiService.addComment(emailInput, contentInput).subscribe(data => console.log({data}))
+  this.apiService.addComment(emailInput, contentInput)
   }  
 }

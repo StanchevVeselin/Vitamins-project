@@ -29,9 +29,11 @@ export class UserService {
 
     this.http.post<User>(apiUrlLogin, {email,password}).subscribe((response) => {
       console.log(response);
-      sessionStorage.setItem(response.email,response.accessToken)
+      sessionStorage.setItem("accessToken",response.accessToken)
     })
     
   }
+
+  
  
 }

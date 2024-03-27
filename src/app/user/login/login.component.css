@@ -61,3 +61,14 @@
 .login__signInButton:hover {
   background-color: #ffbd00;
 }
+
+p.error {
+  color: red;
+  border-radius: 20px;
+  text-align: left;
+  padding-left: 0;
+}
+
+.input-error {
+  border-left-color: red;
+}
