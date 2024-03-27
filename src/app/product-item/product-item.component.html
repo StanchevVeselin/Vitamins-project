@@ -8,8 +8,9 @@
             <button class="add-to-cart-button">Add to Cart</button>
             <!-- Details Button -->
             <a 
-            class="details-button" 
-           
+            class="details-button"
+            [routerLink]="['/products','details', product._id]"
+           (click)="handleClick(product._id)"
             >Details</a>
         </div>
     <!-- </div>    -->

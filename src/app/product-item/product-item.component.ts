@@ -12,9 +12,14 @@ export class ProductItemComponent {
   @Input("product") product = {} as Product
   constructor(private userService: ApiService, private activatedRoute: ActivatedRoute) {}
 
-  // detailsHandle(id: string) {
-  //  return this.userService.getSingleProduct(id)
+  
+  handleClick(id: string) {
+    
+   return this.userService.getSingleProduct(id).subscribe(data => {
+    console.log(data);
+    
+   })
    
-  // }
+  }
 
 }

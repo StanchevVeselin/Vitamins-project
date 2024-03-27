@@ -1,0 +1,36 @@
+<div class="product" *ngIf="product">
+    <img src="https://vision-shop.bg/image/cache/data/photo_2020-03-22_01-36-11-600x600.jpg" class="product__img" alt="Product Image">
+    <div class="product__info">
+        <h2 class="product__title">{{ product.title }}</h2>
+        <p class="product__description">{{ product.description }}</p>
+        <p class="product__price">{{ product.price }}</p>
+        <!-- Add Comment Button -->
+        <!-- <button class="add-comment-button">Add Comment</button> -->
+        <!-- Details Button -->
+        
+    </div>
+</div>
+
+
+
+<app-add />
+
+
+
+
+<!-- <div class="comment-section">
+    <h3>Add Comment</h3>
+  
+    <div class="form-group">
+      <label for="userName">Your Name:</label>
+      <input type="text" id="userName" name="userName"  placeholder="Your Name">
+    </div>
+  
+    <div class="form-group">
+      <label for="commentText">Comment:</label>
+      <textarea id="commentText" name="commentText"  placeholder="Enter your comment here..."></textarea>
+    </div>
+  
+    <button class="btn btn-primary" 
+    >Add Comment</button>
+  </div> -->

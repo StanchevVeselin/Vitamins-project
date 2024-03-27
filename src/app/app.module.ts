@@ -9,8 +9,9 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
-import { DetailsComponent } from './details/details.component'
 import { UserModule } from './user/user.module';
+import { ErrorComponent } from './error/error.component';
+import { DetailModule } from './detail/detail.module';
 
 @NgModule({
   declarations: [
@@ -18,15 +19,16 @@ import { UserModule } from './user/user.module';
     HomeComponent,
     ProductItemComponent,
     CatalogComponent,
-    DetailsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     NgbModule,
     CoreModule,
     HttpClientModule,
-    UserModule
+    UserModule,
+    DetailModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
