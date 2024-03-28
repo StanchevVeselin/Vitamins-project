@@ -17,6 +17,8 @@ export class LoginComponent {
       console.log(form.invalid);
       
     const {email,password} = form.value
+    console.log(form.value);
+    
 
     this.userService.login(email,password)
   }
