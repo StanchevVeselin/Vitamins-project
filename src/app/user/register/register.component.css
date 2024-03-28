@@ -58,3 +58,7 @@
 .login__signInButton:hover {
   background-color: #ffbd00;
 }
+
+p {
+  color: red;
+}

@@ -8,23 +8,55 @@
   <div class="login__container">
       <h1>Create Account</h1>
 
-      <form class="register__form" #form="ngForm" (ngSubmit)="register(form)">
+      <form 
+        class="register__form" 
+        [formGroup]="form"
+        (ngSubmit)="register()"
+      > 
+           
+            
           <h5>E-mail</h5>
-          <input type="text" name="email" ngModel #inputEmail="ngModel" />
+          <input type="text" name="email"  formControlName="email"/>
+            <ng-container class="error-p" *ngIf="form.get('email')?.touched" >
+                <p *ngIf="form.get('email')?.errors?.['required']">E-mail is required</p>
+                <p *ngIf="form.get('email')?.errors?.['minLength']">E-mail must be at least 6 characters</p>
+            </ng-container>
+
 
           <h5>Username</h5>
-          <input type="text" name="username"  />
+          <input type="text" name="username"  formControlName="username"/>
+          <ng-container class="error-p" *ngIf="form.get('username')?.touched" >
+            <p *ngIf="form.get('username')?.errors?.['required']">Username is required </p>
+            <p *ngIf="form.get('username')?.errors?.['minLength']">Username must be at least 6 characters</p>
+            </ng-container> 
 
-          <h5>Password</h5>
-          <input type="password" name="password" ngModel #inputPassword="ngModel" />
+          <ng-container formGroupName="passGroup">
 
-          <h5>Re-enter Password</h5>
-          <input 
-          type="password" 
-          name="repassword"
+            <h5>Password</h5>
+            <input type="password" name="password" formControlName="password"/>
+                    <p *ngIf="form.get('password')?.errors?.['required']">Password is required
+                        and must be at least 6 characters</p>
+                    <p *ngIf="form.get('password')?.errors?.['minLength']">Password must be at least 6 characters</p>
 
-
-           />
+            <h5>Re-enter Password</h5>
+            <input 
+            type="password" 
+            name="repassword" 
+            formControlName="repassword"
+             />
+                
+                
+                <ng-container *ngIf="form.get('passGroup')?.get('repassword')?.touched">
+                    <p 
+                    class="error"
+                    *ngIf="form.get('passGroup')?.errors?.['passMatchVAldiator'] ||
+                    form.get('passGroup')?.get('repassword')?.errors?.['required']"
+                    >
+                    Repeat password does not matched password
+                    </p>
+                </ng-container>                   
+                
+        </ng-container>
 
           <button >Create Account</button>
       </form>
