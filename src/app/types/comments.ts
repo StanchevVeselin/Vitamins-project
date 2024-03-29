@@ -3,7 +3,8 @@ export interface Comments {
     text: string,
     _createdOn: string,
     _id: string,
-    __ownerId:string
+    __ownerId:string,
+    productId: string
 }
 
 // email

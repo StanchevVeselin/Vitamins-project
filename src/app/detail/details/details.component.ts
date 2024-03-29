@@ -9,7 +9,7 @@ import { Product } from '../../types/product';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent {
-  product: Product |undefined
+  product: Product | undefined
 
 
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute ) {}
