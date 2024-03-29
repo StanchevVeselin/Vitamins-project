@@ -41,8 +41,10 @@ export class DetailService {
 
 
          
-      this.http.post<Comments>(apiUrlComments,{username,content,productId},{headers})
-      .subscribe(data => console.log(data))
+      this.http.post<Comments>(apiUrlComments,{username,content,productId},{headers}).subscribe(() => {
+      })
+      
+      
   }
 
   getAllComments(productId:string) {
@@ -52,6 +54,7 @@ export class DetailService {
       'X-Authorization': token ?? ""
     });
 
-   return this.http.get<Comments[]>(apiUrlComments, {headers})
+    return this.http.get<Comments[]>(apiUrlComments, {headers})
+   
   }
 }

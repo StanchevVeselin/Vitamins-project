@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import { DetailService } from '../detail.service';
 import { User } from 'src/app/types/user';
 import { ActivatedRoute } from '@angular/router';
+import { Comments } from 'src/app/types/comments';
 
 @Component({
   selector: 'app-add',
@@ -16,23 +17,47 @@ export class AddComponent implements OnInit{
   content: string = ""
   userEmail: string = "" 
   productId: string = ""
+  filteredComments: any[] = []
    constructor(private detailService: DetailService,private activatedRoute: ActivatedRoute) {
 
    } 
+
+   
 ngOnInit(): void {
   this.userEmail = sessionStorage.getItem("email") ?? ""
-  this.activatedRoute.params.subscribe(p => {
-    this.productId = p["id"]
-    // this.apiService.getSingleProduct(id).subscribe( p => {
-    //   this.product = p
-      console.log(this.productId);
-      this.detailService.getAllComments(this.productId).subscribe(data => {
-       const filteredComment = data.filter(comment => comment.productId === this.productId)
-          console.log(filteredComment);
+  this.activatedRoute.params.subscribe(p=> {
+  this.productId = p["id"]
+  this.loadComments(this.productId)
+  })
+  // this.activatedRoute.params.subscribe(p => {
+  //   this.productId = p["id"]
+    
+  //     console.log(this.productId);
+  //     this.detailService.getAllComments(this.productId).subscribe(data => {
+  //      this.filteredComments = data.filter(comment => comment.productId === this.productId)
+  //         console.log(this.filteredComments);
           
-      })
-      })
+  //     })
+  //     })
 }  
+
+
+
+loadComments(productId: string): void {
+  this.userEmail = sessionStorage.getItem("email") ?? ""
+  this.activatedRoute.params.subscribe(p=> {
+  this.productId = p["id"]
+  this.loadComments(this.productId)
+  })
+  this.detailService.getAllComments(productId)
+  .subscribe(data => {
+   this.filteredComments = data.filter(comment => comment.productId === productId);
+   
+  });
+}
+
+
+
     
       
 

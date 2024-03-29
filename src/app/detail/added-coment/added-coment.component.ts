@@ -8,10 +8,18 @@ import { Comments } from 'src/app/types/comments';
   templateUrl: './added-coment.component.html',
   styleUrls: ['./added-coment.component.css']
 })
-export class AddedComentComponent {
+export class AddedComentComponent implements  OnInit{
   @Input() user: User | undefined 
   @Input() content: string =""
-  comments: Comments[]=[]
+  @Input() filteredComments: Comments[]=[]
+
+  ngOnInit(): void {
+    console.log(this.filteredComments)
+    
+  }
+  
+
+ 
   constructor(private detailService: DetailService) {}
 
  
