@@ -17,7 +17,6 @@ export class DetailsComponent implements OnInit{
   content: string = ""
   userEmail: string = "" 
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
-    console.log(this.filteredComments);
     
   }
   
@@ -27,12 +26,13 @@ export class DetailsComponent implements OnInit{
     this.userEmail = sessionStorage.getItem("email") ?? ""
     this.activatedRoute.params.subscribe(p => {
       const id = p["id"]
-      console.log(id);
       
       this.apiService.getSingleProduct(id).subscribe( p => {
         this.product = p
-        console.log(this.product);
+        
         })
+        
+        console.log(this.detailService.getAllComments(id))
       })
     
     // this.activatedRoute.params.subscribe(p => {
@@ -47,12 +47,12 @@ export class DetailsComponent implements OnInit{
     
   }
 
-  loadComments(productId: string): void {
-    this.detailService.getAllComments(productId).subscribe(data => {
-      this.filteredComments = data.filter(comment => comment.productId === productId);
-      console.log(this.filteredComments);
-    });
-  }
+  // loadComments(productId: string): void {
+  //   this.detailService.getAllComments(productId).subscribe(data => {
+  //     this.filteredComments = data.filter(comment => comment.productId === productId);
+  //     console.log(this.filteredComments);
+  //   });
+  // }
 
  
   

@@ -11,55 +11,47 @@ import { Comments } from 'src/app/types/comments';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
-export class AddComponent implements OnInit{
+export class AddComponent {
   user: User | undefined
   // userName: string = ""
   content: string = ""
   userEmail: string = "" 
   productId: string = ""
-  filteredComments: any[] = []
+  filteredComments: Comments[] = []
+
    constructor(private detailService: DetailService,private activatedRoute: ActivatedRoute) {
 
    } 
 
    
-ngOnInit(): void {
-  this.userEmail = sessionStorage.getItem("email") ?? ""
+// ngOnInit(): void {
+//   this.userEmail = sessionStorage.getItem("email") ?? ""
+//   this.activatedRoute.params.subscribe(p=> {
+//   this.productId = p["id"]
+//   })
+  
+    
+//      this.detailService.getAllComments(this.productId).subscribe((data) => {
+//        this.filteredComments = data.filter(comment => comment.productId === this.productId)
+//           console.log(this.filteredComments);
+//       })
+//       console.log(this.filteredComments);
+//       this.filteredComments.push()
+// }  
+loadComments():void{
+      this.userEmail = sessionStorage.getItem("email") ?? ""
   this.activatedRoute.params.subscribe(p=> {
   this.productId = p["id"]
-  this.loadComments(this.productId)
   })
-  // this.activatedRoute.params.subscribe(p => {
-  //   this.productId = p["id"]
+  
     
-  //     console.log(this.productId);
-  //     this.detailService.getAllComments(this.productId).subscribe(data => {
-  //      this.filteredComments = data.filter(comment => comment.productId === this.productId)
-  //         console.log(this.filteredComments);
-          
-  //     })
-  //     })
-}  
-
-
-
-loadComments(productId: string): void {
-  this.userEmail = sessionStorage.getItem("email") ?? ""
-  this.activatedRoute.params.subscribe(p=> {
-  this.productId = p["id"]
-  this.loadComments(this.productId)
-  })
-  this.detailService.getAllComments(productId)
-  .subscribe(data => {
-   this.filteredComments = data.filter(comment => comment.productId === productId);
-   
-  });
-}
-
-
-
-    
+     this.detailService.getAllComments(this.productId).subscribe((data) => {
+       this.filteredComments = data.filter(comment => comment.productId === this.productId)
+          console.log(this.filteredComments);
+      })
+      console.log(this.filteredComments);
       
+}
 
 
    addComentHandler(form: NgForm) {
@@ -74,12 +66,15 @@ loadComments(productId: string): void {
       
       this.content = form.value.content
      this.detailService.addComent(this.userEmail,this.content, this.productId)
+    // this.detailService.getAllComments(this.productId)
+    this.loadComments()
+     console.log(this.filteredComments);
+     
     form.reset()
    }
-  // addComment(ev: Event,emailInput:string, contentInput: string) {
-  //   ev.preventDefault()
-  // this.apiService.addComment(emailInput, contentInput)
-  // }  
 
+
+   
+ 
 
 }

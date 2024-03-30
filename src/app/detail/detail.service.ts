@@ -6,13 +6,15 @@ import { Comments } from '../types/comments';
 import { ApiService } from '../api.service';
 import { Product } from '../types/product';
 import { ActivatedRoute } from '@angular/router';
+import { Comment } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DetailService {
   product: Product []= []
-
+  filterdComments: Comments[] = []
   constructor(private http: HttpClient,private activatedRoute: ActivatedRoute) { }
 
   // getSingleProduct() {
@@ -21,12 +23,12 @@ export class DetailService {
   // }
 
 
-  addComent( username: string, content: string, productId:string) {
+  addComent( username: string, content: string, productId:string){
       const {apiUrlComments} = environment
       
        // Вземете токена от sessionStorage
        const token = sessionStorage.getItem('accessToken');
-       console.log(token);
+       
        
          // Проверете дали токенът съществува
          if (!token) {
@@ -41,20 +43,31 @@ export class DetailService {
 
 
          
-      this.http.post<Comments>(apiUrlComments,{username,content,productId},{headers}).subscribe(() => {
-      })
+     this.http.post<Comments>(apiUrlComments,{username,content,productId},{headers}).subscribe(data => {
+        this.getAllComments(productId)
+        console.log(data);
+        
+     })
       
-      
+      // this.getAllComments(productId)
   }
 
-  getAllComments(productId:string) {
+  getAllComments(productId:string){
     const {apiUrlComments} = environment
     const token = sessionStorage.getItem('accessToken');
     const headers = new HttpHeaders({
       'X-Authorization': token ?? ""
     });
 
-    return this.http.get<Comments[]>(apiUrlComments, {headers})
+   return this.http.get<Comments[]>(apiUrlComments, {headers})
+    
+    
+    
+    // .subscribe((data: Comments[]) => {
+    //   this.filterdComments = data.filter(comment => comment.productId === productId) 
+    //   console.log(this.filterdComments);
+      
+    // })
    
   }
 }
