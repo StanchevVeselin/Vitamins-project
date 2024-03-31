@@ -71,4 +71,16 @@ export class DetailService {
       });
       return this.http.delete<Comments>(`${apiUrlComments}/${commentId}`, {headers})
   }
+
+  editComment(commentId: string, content: string) {
+    const {apiUrlComments} = environment
+    const token = sessionStorage.getItem('accessToken');
+    const headers = new HttpHeaders({
+      'X-Authorization': token ?? ""
+    });
+
+    return this.http.put(`${apiUrlComments}/${commentId}`,{content} ,{headers})
+
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-edit',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent {
+  // @Input() userEmail: string = '';
+  // @Input() commentContent: string = '';
+  // @Output() submitEdit = new EventEmitter<string>();
+  // @Output() closeModal = new EventEmitter<void>(); 
 
+  // onSubmit() {
+  //   this.submitEdit.emit(this.commentContent);
+  // }
+
+  // onClose() {
+  //   this.closeModal.emit(); 
+  // }
 }

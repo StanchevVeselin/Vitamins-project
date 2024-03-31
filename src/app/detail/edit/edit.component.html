@@ -1,12 +1,17 @@
-<!-- <div class="modal-overlay" (click)="closeModal()">
-    <div class="modal-container" (click)="$event.stopPropagation()">
-      <h2>Edit Comment</h2>
-      <form (ngSubmit)="submitEditForm()">
-        <div class="form-group">
-          <label for="editedContent">Edit Content:</label>
-          <textarea id="editedContent" name="editedContent" [(ngModel)]="editedContent" maxlength="150"></textarea>
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
-  </div> -->
+<!-- <div class="modal">
+  <div class="modal-content">
+    <h3>Edit Comment</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="userEmail">Email:</label>
+        <input type="email" id="userEmail" name="userEmail" [(ngModel)]="userEmail" readonly>
+      </div>
+      <div class="form-group">
+        <label for="commentContent">Comment:</label>
+        <textarea id="commentContent" name="commentContent" [(ngModel)]="commentContent"></textarea>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <button (click)="onClose()">Close</button>
+  </div>
+</div> -->

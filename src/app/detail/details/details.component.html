@@ -20,7 +20,7 @@
     <div class="commentss" *ngFor="let comment of filteredComments">
       <h2 class="commentTitle">{{comment.username}} </h2>
       <p class="commetTitle">{{comment.content}}</p>
-      <button class="edit">Edit</button>
+      <button class="edit" (click)="openEditModal(comment)">Edit</button>
       <button class="delete" (click)="deleteCommentar(comment._id)">Delete</button>
     </div>
   </div>
@@ -37,6 +37,27 @@
 
     <button>Add Comment</button>
   </form>
+
+
+  <div class="modal" *ngIf="editingComment">
+    <div class="modal-content">
+      <h3>Edit Comment</h3>
+      <form #editForm="ngForm" (ngSubmit)="submitEdit(editForm)">
+        <div class="form-group">
+          <label for="userEmail">Email:</label>
+          <input type="email" id="userEmail" name="userEmail" 
+          [(ngModel)]="editingComment.username" 
+           readonly>
+        </div>
+        <div class="form-group">
+          <label for="commentContent">Comment:</label>
+          <textarea id="commentContent" name="commentContent" ngModel="commentContent" [(ngModel)]="editingComment.content"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <button (click)="closeEditModal()">Close</button>
+    </div>
+  </div>
 
 
 </div>

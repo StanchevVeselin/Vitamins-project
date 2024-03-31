@@ -18,6 +18,10 @@ export class DetailsComponent implements OnInit{
   filteredComments: Comments[] =[]
   content: string = ""
   userEmail: string = "" 
+
+  editingCommentId: string = '';
+  commentContent: string = '';
+  editingComment: Comments | null = null
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
     
   }
@@ -82,6 +86,8 @@ this.productId = p["id"]
    
     
     this.content = form.value.content
+    console.log(form.value);
+    
    this.detailService.addComent(this.userEmail,this.content, this.productId)
   // this.detailService.getAllComments(this.productId)
   this.loadComments()
@@ -100,6 +106,42 @@ this.productId = p["id"]
     })
  }
 
+
+
+ openEditModal(comment: Comments): void {
+  this.editingComment = comment;
+  this.commentContent = comment.content
+  console.log('Editing comment:', comment);
+}
+
+closeEditModal(): void {
+  this.editingComment = null;
+}
+
+
+submitEdit(form: NgForm): void {
+  if (form.invalid) {
+    return;
+  }
+  
+  if (!this.editingComment) {
+    return;
+  }
+
+  const newContent = this.commentContent;
+  console.log(newContent);
+  
+  this.detailService.editComment(this.editingComment._id, newContent).subscribe(() => {
+    this.loadComments();
+    this.closeEditModal();
+  });
+}
+
+
+
+
+}
+
  
   
-}
+
