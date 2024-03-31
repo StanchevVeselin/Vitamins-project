@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../types/product';
 import { DetailService } from '../detail.service';
 import { Comments } from 'src/app/types/comments';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -11,9 +12,10 @@ import { Comments } from 'src/app/types/comments';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit{
+  // @Input() filteredComments: Comments[] = []
   product: Product | undefined
   productId: string = ""
-  filteredComments: Comments [] =[]
+  filteredComments: Comments[] =[]
   content: string = ""
   userEmail: string = "" 
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
@@ -29,10 +31,12 @@ export class DetailsComponent implements OnInit{
       
       this.apiService.getSingleProduct(id).subscribe( p => {
         this.product = p
+        this.loadComments()
+        console.log(this.loadComments());
         
         })
         
-        console.log(this.detailService.getAllComments(id))
+        
       })
     
     // this.activatedRoute.params.subscribe(p => {
@@ -47,12 +51,54 @@ export class DetailsComponent implements OnInit{
     
   }
 
-  // loadComments(productId: string): void {
-  //   this.detailService.getAllComments(productId).subscribe(data => {
-  //     this.filteredComments = data.filter(comment => comment.productId === productId);
-  //     console.log(this.filteredComments);
-  //   });
-  // }
+ 
+
+
+  loadComments():void{
+    this.userEmail = sessionStorage.getItem("email") ?? ""
+this.activatedRoute.params.subscribe(p=> {
+this.productId = p["id"]
+})
+
+  
+   this.detailService.getAllComments(this.productId).subscribe((data) => {
+     this.filteredComments = data.filter(comment => comment.productId === this.productId)
+      // const filteredComments = data.filter(comment => comment.productId === this.productId)
+      //   console.log(filteredComments);
+      //   this.filteredCommentsEvent.emit(filteredComments)
+    })
+    
+}
+
+
+ addComentHandler(form: NgForm) {
+    if(form.invalid) {
+      return
+    }
+    
+    
+    
+    this.userEmail = sessionStorage.getItem("email") ?? ""
+   
+    
+    this.content = form.value.content
+   this.detailService.addComent(this.userEmail,this.content, this.productId)
+  // this.detailService.getAllComments(this.productId)
+  this.loadComments()
+   
+   
+  form.reset()
+ }
+
+ deleteCommentar(commentId: string): void {
+  console.log(commentId);
+  
+    this.detailService.deleteComment(commentId).subscribe((data) => {
+    console.log(data);
+          
+      this.loadComments()
+    })
+ }
 
  
   

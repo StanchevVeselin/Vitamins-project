@@ -60,14 +60,15 @@ export class DetailService {
     });
 
    return this.http.get<Comments[]>(apiUrlComments, {headers})
-    
-    
-    
-    // .subscribe((data: Comments[]) => {
-    //   this.filterdComments = data.filter(comment => comment.productId === productId) 
-    //   console.log(this.filterdComments);
-      
-    // })
    
+  }
+
+  deleteComment(commentId: string) {
+      const {apiUrlComments} = environment
+      const token = sessionStorage.getItem('accessToken');
+      const headers = new HttpHeaders({
+        'X-Authorization': token ?? ""
+      });
+      return this.http.delete<Comments>(`${apiUrlComments}/${commentId}`, {headers})
   }
 }

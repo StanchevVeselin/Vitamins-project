@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import { DetailService } from '../detail.service';
@@ -12,12 +12,12 @@ import { Comments } from 'src/app/types/comments';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
+  @Output() filteredCommentsEvent = new EventEmitter<Comments[]>();
   user: User | undefined
-  // userName: string = ""
   content: string = ""
   userEmail: string = "" 
   productId: string = ""
-  filteredComments: Comments[] = []
+  // filteredComments: Comments[] = []
 
    constructor(private detailService: DetailService,private activatedRoute: ActivatedRoute) {
 
@@ -46,10 +46,11 @@ loadComments():void{
   
     
      this.detailService.getAllComments(this.productId).subscribe((data) => {
-       this.filteredComments = data.filter(comment => comment.productId === this.productId)
-          console.log(this.filteredComments);
+      //  this.filteredComments = data.filter(comment => comment.productId === this.productId)
+        const filteredComments = data.filter(comment => comment.productId === this.productId)
+          console.log(filteredComments);
+          this.filteredCommentsEvent.emit(filteredComments)
       })
-      console.log(this.filteredComments);
       
 }
 
@@ -68,7 +69,7 @@ loadComments():void{
      this.detailService.addComent(this.userEmail,this.content, this.productId)
     // this.detailService.getAllComments(this.productId)
     this.loadComments()
-     console.log(this.filteredComments);
+     
      
     form.reset()
    }

@@ -20,13 +20,17 @@
     padding: 10px;
 }
 
-.commentTitle {
+.commentss .commentTitle {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.commentContent {
+.commentss .commetTitle {
     font-size: 14px;
     color: #333;
+}
+
+.commentss button {
+    margin-top: 10px;
 }

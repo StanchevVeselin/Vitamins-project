@@ -1,37 +1,53 @@
 <div class="comment-section">
-  <!-- <app-added-coment  [content]="content" [filteredComments]="filteredComments" >
-  </app-added-coment> -->
 
 
-<div class="product" *ngIf="product">
-    <img src="https://vision-shop.bg/image/cache/data/photo_2020-03-22_01-36-11-600x600.jpg" class="product__img" alt="Product Image">
+
+  <div class="product" *ngIf="product">
+    <img src="https://vision-shop.bg/image/cache/data/photo_2020-03-22_01-36-11-600x600.jpg" class="product__img"
+      alt="Product Image">
     <div class="product__info">
-        <h2 class="product__title">{{ product?.title }}</h2>
-        <p class="product__description">{{ product?.description }}</p>
-        <p class="product__price">{{ product?.comments}}</p>
-        <!-- Add Comment Button -->
-        <!-- <button class="add-comment-button">Add Comment</button> -->
-        <!-- Details Button -->
-        
+      <h2 class="product__title">{{ product.title }}</h2>
+      <p class="product__description">{{ product.description }}</p>
+      <p class="product__price">{{ product.comments}}</p>
+      <!-- Add Comment Button -->
+      <!-- <button class="add-comment-button">Add Comment</button> -->
+      <!-- Details Button -->
     </div>
-</div>
-
-<!-- <div class="comment-section">
- 
+  </div>
 
   <h3>Comments</h3>
-  <div class="container" *ngIf="filteredComments && filteredComments.length > 0">     
-  <div class="commentss" *ngFor="let comment of filteredComments">
+  <div class="container" *ngIf="filteredComments && filteredComments.length > 0">
+    <div class="commentss" *ngFor="let comment of filteredComments">
       <h2 class="commentTitle">{{comment.username}} </h2>
       <p class="commetTitle">{{comment.content}}</p>
+      <button class="edit">Edit</button>
+      <button class="delete" (click)="deleteCommentar(comment._id)">Delete</button>
+    </div>
   </div>
-</div> -->
+
+  <h3>Add Comment</h3>
+
+  <form #form="ngForm" (ngSubmit)="addComentHandler(form)">
+
+    <div class="form-group">
+      <label for="commentText">Comment:</label>
+      <textarea id="commentText" name="content" placeholder="Enter your comment here..." ngModel #contentInput="ngModel"
+        maxlength="150"></textarea>
+    </div>
+
+    <button>Add Comment</button>
+  </form>
+
+
+</div>
 
 
 
 
 
-<app-add />
+
+
+
 
 
 
