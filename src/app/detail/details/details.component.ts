@@ -12,7 +12,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit{
-  // @Input() filteredComments: Comments[] = []
   product: Product | undefined
   productId: string = ""
   filteredComments: Comments[] =[]
@@ -25,40 +24,18 @@ export class DetailsComponent implements OnInit{
   isAuthor: boolean |undefined
 
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
-    
   }
-  
-  
   
   ngOnInit(): void {
     this.userEmail = sessionStorage.getItem("email") ?? ""
-    
     this.activatedRoute.params.subscribe(p => {
-      const id = p["id"]
+    const id = p["id"]
       
       this.apiService.getSingleProduct(id).subscribe( p => {
         this.product = p
         this.loadComments()
-        
-        
-        
-        
-        
         })
-        
       })
-     
-    
-    // this.activatedRoute.params.subscribe(p => {
-    // this.productId = p["id"]
-    
-    //  return this.detailService.getAllComments(this.productId).subscribe(data => {
-    //   this.filteredComments = data.filter(comment => comment.productId === this.productId)
-    //       console.log(this.filteredComments);
-          
-    //   })
-    //   })
-    
   }
 
  
@@ -66,57 +43,37 @@ export class DetailsComponent implements OnInit{
 
   loadComments():void{
     this.userEmail = sessionStorage.getItem("email") ?? ""
-this.activatedRoute.params.subscribe(p=> {
-this.productId = p["id"]
-console.log(this.isAuthor);
-
-
-})
-
-  
+    this.activatedRoute.params.subscribe(p=> {
+        this.productId = p["id"]
+    })
    this.detailService.getAllComments(this.productId).subscribe((data) => {
      this.filteredComments = data.filter(comment => comment.productId === this.productId).map(comment => {
       comment.isOwner = this.isOwner(comment.username);
       return comment
-     })
-      // const filteredComments = data.filter(comment => comment.productId === this.productId)
-        console.log(this.filteredComments);
-        
-        // console.log(this.isOwner(this.filteredComments.filter(c => c.username)));
-        
+     })        
     })
-    
-}
+  }
 
 
  addComentHandler(form: NgForm) {
     if(form.invalid) {
       return
     }
-    
-    
-    
+ 
     this.userEmail = sessionStorage.getItem("email") ?? ""
-   
-    
     this.content = form.value.content
-    console.log(form.value);
+    this.detailService.addComent(this.userEmail,this.content, this.productId)
+    this.loadComments()
+    form.reset()
+
     
-   this.detailService.addComent(this.userEmail,this.content, this.productId)
-  // this.detailService.getAllComments(this.productId)
-  this.loadComments()
-  
    
-   
-  form.reset()
  }
 
  deleteCommentar(commentId: string): void {
   console.log(commentId);
   
-    this.detailService.deleteComment(commentId).subscribe((data) => {
-    console.log(data);
-          
+    this.detailService.deleteComment(commentId).subscribe(() => {
       this.loadComments()
     })
  }
@@ -125,8 +82,10 @@ console.log(this.isAuthor);
 
  openEditModal(comment: Comments): void {
   this.editingComment = comment;
-  this.commentContent = comment.content
-  console.log('Editing comment:', comment);
+  // this.commentContent = comment.content
+  // console.log('Editing comment:', comment);
+  this.commentContent = this.editingComment.content; // Присвояваме съдържанието на коментара
+  console.log('Editing comment:', this.editingComment);
 }
 
 closeEditModal(): void {
@@ -144,11 +103,21 @@ submitEdit(form: NgForm): void {
   }
   const contentForm = form.value.commentContent
   const newContent = this.commentContent;
-  console.log(newContent);
-  console.log(contentForm);
-  
-  this.detailService.editComment(this.editingComment._id, contentForm,this.editingComment.productId).subscribe((data) => {
-    this.loadComments()
+
+  if (this.editingComment) {
+    this.editingComment.content = contentForm;
+  }
+
+  this.detailService.editComment(this.editingComment._id, contentForm,this.editingComment.productId,this.editingComment.isOwner,this.editingComment.username).subscribe((data) => {
+    // this.loadComments()
+    this.filteredComments = this.filteredComments.map(comment => {
+      if (comment._id === data._id) {
+        return data; // Обновен коментар
+        username: comment.username
+      } else {
+        return comment; // Оставете останалите коментари непроменени
+      }
+    });
     this.closeEditModal()
   });
 }
