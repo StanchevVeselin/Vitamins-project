@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 
@@ -7,19 +7,25 @@ import { UserService } from '../user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   constructor(private userService: UserService) {}
+  isLoggedIn: boolean = false;
 
+  ngOnInit(): void {
+    this.isLoggedIn = this.userService.isLoggedIn()
+  }
+  
   login(form: NgForm){
       if(form.invalid) {
         return
       }
-      console.log(form.invalid);
       
     const {email,password} = form.value
     console.log(form.value);
     
 
     this.userService.login(email,password)
+    this.isLoggedIn = true
+    console.log(this.isLoggedIn)
   }
 }

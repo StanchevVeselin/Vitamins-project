@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../types/user';
 import { environment } from 'src/environments/environment.development';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,32 @@ export class UserService {
       console.log(response);
       sessionStorage.setItem('email', response.email);
       sessionStorage.setItem("accessToken",response.accessToken)
+      this.isLoggedIn()
+      console.log(this.isLoggedIn());
+      
     })
     
+  }
+
+  logout() {
+    const{apiUrl} = environment
+    // sessionStorage.removeItem("accessToken")
+    const token = sessionStorage.getItem('accessToken');
+    const headers = new HttpHeaders({
+      'X-Authorization': token ?? ""
+    });
+    
+   return this.http.get(`${apiUrl}/users/logout`,{headers}).subscribe(() => {
+    sessionStorage.removeItem("email")
+    sessionStorage.removeItem("accessToken")
+    
+   })
+  }
+
+  isLoggedIn() {
+    const accessToken = sessionStorage.getItem("accessToken")
+    
+    return accessToken !== null
   }
 
   
