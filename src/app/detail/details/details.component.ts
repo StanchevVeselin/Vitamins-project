@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit{
   editingCommentId: string = '';
   commentContent: string = '';
   editingComment: Comments | null = null
+
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
     
   }
@@ -68,7 +69,7 @@ this.productId = p["id"]
    this.detailService.getAllComments(this.productId).subscribe((data) => {
      this.filteredComments = data.filter(comment => comment.productId === this.productId)
       // const filteredComments = data.filter(comment => comment.productId === this.productId)
-      //   console.log(filteredComments);
+        console.log(this.filteredComments);
       //   this.filteredCommentsEvent.emit(filteredComments)
     })
     
@@ -91,6 +92,8 @@ this.productId = p["id"]
    this.detailService.addComent(this.userEmail,this.content, this.productId)
   // this.detailService.getAllComments(this.productId)
   this.loadComments()
+  console.log(this.loadComments());
+  
    
    
   form.reset()
@@ -127,13 +130,14 @@ submitEdit(form: NgForm): void {
   if (!this.editingComment) {
     return;
   }
-
+  const contentForm = form.value.commentContent
   const newContent = this.commentContent;
   console.log(newContent);
+  console.log(contentForm);
   
-  this.detailService.editComment(this.editingComment._id, newContent).subscribe(() => {
-    this.loadComments();
-    this.closeEditModal();
+  this.detailService.editComment(this.editingComment._id, contentForm,this.editingComment.productId).subscribe((data) => {
+    this.loadComments()
+    this.closeEditModal()
   });
 }
 
