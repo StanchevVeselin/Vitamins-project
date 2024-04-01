@@ -33,8 +33,6 @@ export class UserService {
       sessionStorage.setItem('email', response.email);
       sessionStorage.setItem("accessToken",response.accessToken)
       this.isLoggedIn()
-      console.log(this.isLoggedIn());
-      
     })
     
   }

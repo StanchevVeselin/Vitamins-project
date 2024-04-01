@@ -22,6 +22,7 @@ export class DetailsComponent implements OnInit{
   editingCommentId: string = '';
   commentContent: string = '';
   editingComment: Comments | null = null
+  isAuthor: boolean |undefined
 
   constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
     
@@ -31,18 +32,22 @@ export class DetailsComponent implements OnInit{
   
   ngOnInit(): void {
     this.userEmail = sessionStorage.getItem("email") ?? ""
+    
     this.activatedRoute.params.subscribe(p => {
       const id = p["id"]
       
       this.apiService.getSingleProduct(id).subscribe( p => {
         this.product = p
         this.loadComments()
-        console.log(this.loadComments());
+        
+        
+        
+        
         
         })
         
-        
       })
+     
     
     // this.activatedRoute.params.subscribe(p => {
     // this.productId = p["id"]
@@ -63,14 +68,22 @@ export class DetailsComponent implements OnInit{
     this.userEmail = sessionStorage.getItem("email") ?? ""
 this.activatedRoute.params.subscribe(p=> {
 this.productId = p["id"]
+console.log(this.isAuthor);
+
+
 })
 
   
    this.detailService.getAllComments(this.productId).subscribe((data) => {
-     this.filteredComments = data.filter(comment => comment.productId === this.productId)
+     this.filteredComments = data.filter(comment => comment.productId === this.productId).map(comment => {
+      comment.isOwner = this.isOwner(comment.username);
+      return comment
+     })
       // const filteredComments = data.filter(comment => comment.productId === this.productId)
         console.log(this.filteredComments);
-      //   this.filteredCommentsEvent.emit(filteredComments)
+        
+        // console.log(this.isOwner(this.filteredComments.filter(c => c.username)));
+        
     })
     
 }
@@ -92,7 +105,6 @@ this.productId = p["id"]
    this.detailService.addComent(this.userEmail,this.content, this.productId)
   // this.detailService.getAllComments(this.productId)
   this.loadComments()
-  console.log(this.loadComments());
   
    
    
@@ -140,6 +152,17 @@ submitEdit(form: NgForm): void {
     this.closeEditModal()
   });
 }
+
+
+isOwner(email:string){
+  
+ return this.isAuthor = this.detailService.isOwner(email)
+  
+}
+
+
+
+
 
 
 

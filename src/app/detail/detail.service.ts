@@ -83,4 +83,18 @@ export class DetailService {
 
   }
 
+  isOwner(commentOwnerEmail: string): boolean {
+    const userEmail = sessionStorage.getItem("email") ?? ""
+   console.log(userEmail);
+    console.log(commentOwnerEmail);
+    
+    
+    const isOwner = userEmail === commentOwnerEmail
+    
+    console.log(isOwner);
+    
+
+    return userEmail === commentOwnerEmail
+  }
+
 }

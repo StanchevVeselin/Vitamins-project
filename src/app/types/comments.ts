@@ -6,7 +6,8 @@ export interface Comments {
     _createdOn: string,
     _id: string,
     __ownerId:string,
-    productId: string
+    productId: string,
+    isOwner: boolean
 }
 
 // email

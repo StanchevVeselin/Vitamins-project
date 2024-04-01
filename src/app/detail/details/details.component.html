@@ -20,8 +20,11 @@
     <div class="commentss" *ngFor="let comment of filteredComments">
       <h2 class="commentTitle">{{comment.username}} </h2>
       <p class="commetTitle">{{comment.content}}</p>
-      <button class="edit" (click)="openEditModal(comment)">Edit</button>
-      <button class="delete" (click)="deleteCommentar(comment._id)">Delete</button>
+      <div *ngIf="comment.isOwner" class="buttonsEditAndDelete">
+        <button   class="edit" (click)="openEditModal(comment)">Edit</button>
+        
+        <button class="delete" (click)="deleteCommentar(comment._id)">Delete</button>
+      </div>
     </div>
   </div>
 
