@@ -5,7 +5,6 @@ export function passMatchVAldiator(passwordControl:string, repasswordControl:str
         const passFirts = control.get(passwordControl)
         const passSecond = control.get(repasswordControl)
         const isMatched = passFirts?.value === passSecond?.value
-        console.log({isMatched});
         
         return isMatched 
         ? null

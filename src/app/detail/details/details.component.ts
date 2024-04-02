@@ -38,9 +38,6 @@ export class DetailsComponent implements OnInit{
       })
   }
 
- 
-
-
   loadComments():void{
     this.userEmail = sessionStorage.getItem("email") ?? ""
     this.activatedRoute.params.subscribe(p=> {
@@ -65,9 +62,6 @@ export class DetailsComponent implements OnInit{
     this.detailService.addComent(this.userEmail,this.content, this.productId)
     this.loadComments()
     form.reset()
-
-    
-   
  }
 
  deleteCommentar(commentId: string): void {
@@ -82,10 +76,7 @@ export class DetailsComponent implements OnInit{
 
  openEditModal(comment: Comments): void {
   this.editingComment = comment;
-  // this.commentContent = comment.content
-  // console.log('Editing comment:', comment);
-  this.commentContent = this.editingComment.content; // Присвояваме съдържанието на коментара
-  console.log('Editing comment:', this.editingComment);
+  this.commentContent = this.editingComment.content; 
 }
 
 closeEditModal(): void {
@@ -109,13 +100,12 @@ submitEdit(form: NgForm): void {
   }
 
   this.detailService.editComment(this.editingComment._id, contentForm,this.editingComment.productId,this.editingComment.isOwner,this.editingComment.username).subscribe((data) => {
-    // this.loadComments()
     this.filteredComments = this.filteredComments.map(comment => {
       if (comment._id === data._id) {
-        return data; // Обновен коментар
+        return data;
         username: comment.username
       } else {
-        return comment; // Оставете останалите коментари непроменени
+        return comment; 
       }
     });
     this.closeEditModal()

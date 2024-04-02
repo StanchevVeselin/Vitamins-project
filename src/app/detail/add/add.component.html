@@ -1,24 +1,11 @@
 <div class="comment-section"> 
-        <!-- <app-added-coment [user]="user" [content]="content" [filteredComments]="filteredComments" >
-        </app-added-coment> -->
   <h3>Add Comment</h3> 
-  
-
    <div class="form-group">
           <label for="userName">Your name:</label>
           <input type="text" id="userName" name="userName" placeholder="Your Name" [value]="userEmail"  disabled>
-          <!-- <input type="text" id="userName" name="userName" placeholder="Your Name" ngModel #usernameInput="ngModel"  maxlength="15"> -->
       </div>
 
   <form #form="ngForm" (ngSubmit)="addComentHandler(form)">
-      <!-- <div class="form-group">
-          <label for="userName">{{userEmail}}</label>
-          <input type="text" id="userName" name="userName" placeholder="Your Name" [value]="userEmail"  disabled>
-          <input type="text" id="userName" name="userName" placeholder="Your Name" ngModel #usernameInput="ngModel"  maxlength="15">
-      </div> -->
-
-      
-
       <div class="form-group">
           <label for="commentText">Comment:</label>
           <textarea id="commentText" name="content" placeholder="Enter your comment here..." ngModel #contentInput="ngModel" maxlength="150"></textarea>

@@ -6,8 +6,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
-  width: calc(33.33% - 20px); /* Adjust the width based on the number of products per row */
-  margin-bottom: 20px; /* Добавена: Разстояние между продуктите */
+  width: calc(33.33% - 20px); 
+  margin-bottom: 20px; 
 }
 
 .product__img {

@@ -17,27 +17,12 @@ export class AddComponent {
   content: string = ""
   userEmail: string = "" 
   productId: string = ""
-  // filteredComments: Comments[] = []
 
    constructor(private detailService: DetailService,private activatedRoute: ActivatedRoute) {
 
    } 
 
    
-// ngOnInit(): void {
-//   this.userEmail = sessionStorage.getItem("email") ?? ""
-//   this.activatedRoute.params.subscribe(p=> {
-//   this.productId = p["id"]
-//   })
-  
-    
-//      this.detailService.getAllComments(this.productId).subscribe((data) => {
-//        this.filteredComments = data.filter(comment => comment.productId === this.productId)
-//           console.log(this.filteredComments);
-//       })
-//       console.log(this.filteredComments);
-//       this.filteredComments.push()
-// }  
 loadComments():void{
       this.userEmail = sessionStorage.getItem("email") ?? ""
   this.activatedRoute.params.subscribe(p=> {
@@ -46,7 +31,6 @@ loadComments():void{
   
     
      this.detailService.getAllComments(this.productId).subscribe((data) => {
-      //  this.filteredComments = data.filter(comment => comment.productId === this.productId)
         const filteredComments = data.filter(comment => comment.productId === this.productId)
           console.log(filteredComments);
           this.filteredCommentsEvent.emit(filteredComments)

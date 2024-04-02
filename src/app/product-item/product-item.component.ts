@@ -19,18 +19,7 @@ export class ProductItemComponent {
   handleClick(id: string) {
     
    return this.userService.getSingleProduct(id).subscribe(data => {
-    console.log(data);
-    // this.loadComments(id)
    })
    
   }
-
-  // loadComments(productId: string): void {
-  //   this.detailService.getAllComments(productId).subscribe(data => {
-  //     this.filteredComments = data.filter(comment => comment.productId === productId);
-  //     console.log(this.filteredComments);
-  //   });
-  // }
-  
-
 }

@@ -33,9 +33,9 @@ export class RegisterComponent {
       const userData: User = {
         email: this.form.value.email,
         password: this.form.value.passGroup.password,
-        _createdOn: 0, // поставете подходяща стойност за създадено на
-        _id: '', // поставете подходяща стойност за идентификационен номер
-        accessToken: '' // поставете подходяща стойност за токен
+        _createdOn: 0, 
+        _id: '', 
+        accessToken: '' 
       };
       
       this.userService.register(userData.email,userData.password)

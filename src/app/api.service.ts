@@ -22,34 +22,5 @@ export class ApiService {
 
     return this.http.get<Product>(`${apiUrl}/data/products/${id}`)
   }
-
-  // addComment(email: string, text: string) {
-  //   const {apiUrl} = environment
     
-  //       const token = sessionStorage.getItem('accessToken');
-  //     console.log(token);
-      
-  //       if (!token) {
-  //         console.error('Token not found in sessionStorage');
-  //         return;
-  //       }
-    
-  //       const headers = new HttpHeaders({
-  //         'X-Authorization': token
-  //       });
-    
-  //       return this.http.post<Comments>(`${apiUrl}/data/comments`, { email, text }, { headers }).subscribe(data=>console.log(data)
-  //       );
-  //     }
-    
-   
-
-  //  return this.http.post<Comments>(`${apiUrl}/data/comments`, {email,text}).subscribe(data=> {
-
-  //     console.log(data);
-      
-  //   }
-    
-    
-    
-  }
+}

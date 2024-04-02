@@ -13,7 +13,6 @@ export class CatalogComponent implements OnInit{
 
   ngOnInit(): void {
       this.apiService.getAllProducts().subscribe((products => {
-        console.log(products);
         this.products = products
       }))  
   }
