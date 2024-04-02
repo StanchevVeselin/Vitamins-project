@@ -8,15 +8,15 @@
     <div class="product__info">
       <h2 class="product__title">{{ product.title }}</h2>
       <p class="product__description">{{ product.description }}</p>
-      <p class="product__price">{{ product.comments}}</p>
+      <p class="product__price">${{ product.price}}</p>
     </div>
   </div>
 
-  <h3>Comments</h3>
+  <h3>Comments Section:</h3>
   <div class="container" *ngIf="filteredComments && filteredComments.length > 0">
     <div class="commentss" *ngFor="let comment of filteredComments">
-      <h2 class="commentTitle">{{comment.username}} </h2>
-      <p class="commetTitle">{{comment.content}}</p>
+      <h2 class="commentTitle">Name:  {{comment.username}} </h2>
+      <p class="commetContent">{{comment.content}}</p>
       <div *ngIf="comment.isOwner" class="buttonsEditAndDelete">
         <button   class="edit" (click)="openEditModal(comment)">Edit</button>
         
@@ -25,17 +25,17 @@
     </div>
   </div>
 
-  <h3>Add Comment</h3>
+  <h2>Add Comment Section</h2>
 
   <form #form="ngForm" (ngSubmit)="addComentHandler(form)">
 
     <div class="form-group">
-      <label for="commentText">Comment:</label>
+      <label class="labelComment" for="commentText">Enter your comment here:</label>
       <textarea id="commentText" name="content" placeholder="Enter your comment here..." ngModel #contentInput="ngModel"
         maxlength="150"></textarea>
     </div>
 
-    <button>Add Comment</button>
+    <button class="addComment">Add Comment</button>
   </form>
 
 
