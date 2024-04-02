@@ -28,7 +28,6 @@ export class DetailService {
 
      this.http.post<Comments>(apiUrlComments,{username,content,productId},{headers}).subscribe(data => {
         this.getAllComments(productId)
-        console.log(data);
      })
   }
 

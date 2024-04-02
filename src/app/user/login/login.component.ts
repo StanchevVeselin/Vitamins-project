@@ -26,5 +26,6 @@ export class LoginComponent implements OnInit{
 
     this.userService.login(email,password)
     this.isLoggedIn = true
+    
   }
 }

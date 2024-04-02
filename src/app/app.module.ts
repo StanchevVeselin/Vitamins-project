@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { UserModule } from './user/user.module';
 import { ErrorComponent } from './error/error.component';
 import { DetailModule } from './detail/detail.module';
+import { appInterceptorProvider } from './app.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { DetailModule } from './detail/detail.module';
     DetailModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

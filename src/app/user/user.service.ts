@@ -2,21 +2,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../types/user';
 import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   register(email: string,password:string ) {
     const {apiUrlRegister} = environment
     
       this.http.post<User>(apiUrlRegister, {email,password}).subscribe((response) => {
-        console.log(response);
         this.login(email,password)
-        
     }
     )
   }
@@ -27,10 +26,10 @@ export class UserService {
 
     this.http.post<User>(apiUrlLogin, {email,password})
     .subscribe((response) => {
-      console.log(response);
       sessionStorage.setItem('email', response.email);
       sessionStorage.setItem("accessToken",response.accessToken)
       this.isLoggedIn()
+      this.router.navigate(["home"])
     })
   }
 
