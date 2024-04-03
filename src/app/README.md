@@ -1,3 +1,5 @@
+
+
 The project is an online shop for vitamins from which customers can shop and write comments if they are satisfied with the product after using it.
 
 This project was created by Veselin Stanchev for the purposes of Angular js Softuni Course, 02.2024.
@@ -22,6 +24,7 @@ About
 Catalog
 Details of each product
 Write comments - (edit comment, delete comment)
+
 Logout
 
 The following packages were used for this project:
