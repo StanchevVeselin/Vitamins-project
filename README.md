@@ -68,6 +68,7 @@ Run "cd ./dist/"
 Run - node server.js
 
 Navigate to the "Vitamnis" folder
+Run - npm i
 Run "ng serve"
 
 You can check here for more information about the configuration.
