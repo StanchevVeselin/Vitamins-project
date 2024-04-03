@@ -9,10 +9,20 @@
 
             <ng-container *ngIf="inputEmail.touched">
                 <p class="error" *ngIf="inputEmail.errors?.['required']">Email is required</p>
+                <!-- <p class="error" *ngIf="inputEmail.errors?.['email']">Invalid email format</p> -->
             </ng-container>
 
           <h5>Password</h5>
-          <input type="password" name="password" ngModel #inputPassword="ngModel" />
+          <input type="password" name="password" ngModel #inputPassword="ngModel" minlength="6" required />
+
+          <ng-container *ngIf="inputPassword.touched">
+            <p class="error" *ngIf="inputPassword.errors?.['required']">Password is required</p>
+            <p class="error" *ngIf="inputPassword.errors?.['minlength']">Password must be at least 6 characters long</p>
+          </ng-container>
+
+          <div *ngIf="userService.errorMessage" class="error-emailAndPass">
+            {{ userService.errorMessage }}
+        </div>
 
           <button  class="login__signInButton">Sign In</button>
       </div>

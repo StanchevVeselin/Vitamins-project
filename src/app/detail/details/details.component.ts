@@ -39,11 +39,13 @@ export class DetailsComponent implements OnInit{
   }
 
   loadComments():void{
-    this.userEmail = sessionStorage.getItem("email") ?? ""
+    // this.userEmail = sessionStorage.getItem("email") ?? ""
     this.activatedRoute.params.subscribe(p=> {
         this.productId = p["id"]
     })
    this.detailService.getAllComments(this.productId).subscribe((data) => {
+    console.log(data);
+    
      this.filteredComments = data.filter(comment => comment.productId === this.productId).map(comment => {
       comment.isOwner = this.isOwner(comment.username);
       return comment

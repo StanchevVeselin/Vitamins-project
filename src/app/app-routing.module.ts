@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { ErrorComponent } from './error/error.component';
+import { ErrorComponent } from './core/error/error.component';
 
 const routes: Routes = [
   {path:"home",component: HomeComponent},
@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
   },
-  {path:"404", component:ErrorComponent},
+  {path: "404", component: ErrorComponent},
   {path:"**", redirectTo:"/404"}
 ];
 

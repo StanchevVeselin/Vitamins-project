@@ -9,6 +9,9 @@
 .login__logoTitle {
   color: black;
 }
+.error-emailAndPass {
+  color: red;
+}
 
 .login__container {
   width: 300px;

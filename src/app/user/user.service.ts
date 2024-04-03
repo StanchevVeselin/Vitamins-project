@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-
+  errorMessage: string = '';
   constructor(private http: HttpClient, private router: Router) { }
 
   register(email: string,password:string ) {
@@ -30,7 +30,15 @@ export class UserService {
       sessionStorage.setItem("accessToken",response.accessToken)
       this.isLoggedIn()
       this.router.navigate(["home"])
-    })
+    },
+    (error) => {
+                if (error.status === 401) {
+                    this.errorMessage = 'Wrong email or password';
+                } else {
+                    this.errorMessage = 'Wrong email or password';
+                }
+            }
+    )
   }
 
   logout() {

@@ -8,7 +8,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
   isLoggedIn: boolean = false;
 
   ngOnInit(): void {

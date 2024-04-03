@@ -9,10 +9,10 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
-// import { UserModule } from './user/user.module';
-import { ErrorComponent } from './error/error.component';
 import { DetailModule } from './detail/detail.module';
 import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +20,14 @@ import { appInterceptorProvider } from './app.interceptor';
     HomeComponent,
     ProductItemComponent,
     CatalogComponent,
-    ErrorComponent,
+    AuthenticateComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
     CoreModule,
     HttpClientModule,
-    // UserModule,
     DetailModule,
     AppRoutingModule,
   ],

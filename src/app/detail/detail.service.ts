@@ -34,10 +34,11 @@ export class DetailService {
   getAllComments(productId:string){
     const {apiUrlComments} = environment
     const token = sessionStorage.getItem('accessToken');
-    const headers = new HttpHeaders({
-      'X-Authorization': token ?? ""
-    });
-   return this.http.get<Comments[]>(apiUrlComments, {headers})
+    // const headers = new HttpHeaders({
+    //   'X-Authorization': token ?? ""
+    // });
+    // {headers}
+   return this.http.get<Comments[]>(apiUrlComments)
   }
 
   deleteComment(commentId: string) {
