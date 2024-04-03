@@ -15,12 +15,12 @@
 
 .login__container {
   width: 300px;
-  height: fit-content;
+  height: auto;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid lightgray;
-  padding: 20px;
+  padding: 100px 10px;
 }
 
 .login__container > h1 {
