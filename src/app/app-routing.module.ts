@@ -8,7 +8,10 @@ const routes: Routes = [
   {path:"home",component: HomeComponent},
   {path:"",pathMatch:"full",redirectTo: "/home"},
   {path:"catalog",component: CatalogComponent},
-  
+  {
+    path: 'auth',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
+  },
   {path:"404", component:ErrorComponent},
   {path:"**", redirectTo:"/404"}
 ];

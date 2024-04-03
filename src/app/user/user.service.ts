@@ -43,6 +43,7 @@ export class UserService {
    return this.http.get(`${apiUrl}/users/logout`,{headers}).subscribe(() => {
     sessionStorage.removeItem("email")
     sessionStorage.removeItem("accessToken")
+    this.router.navigate(["home"])
    })
   }
 

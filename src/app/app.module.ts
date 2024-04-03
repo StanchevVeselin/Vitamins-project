@@ -9,7 +9,7 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CoreModule } from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
-import { UserModule } from './user/user.module';
+// import { UserModule } from './user/user.module';
 import { ErrorComponent } from './error/error.component';
 import { DetailModule } from './detail/detail.module';
 import { appInterceptorProvider } from './app.interceptor';
@@ -27,7 +27,7 @@ import { appInterceptorProvider } from './app.interceptor';
     NgbModule,
     CoreModule,
     HttpClientModule,
-    UserModule,
+    // UserModule,
     DetailModule,
     AppRoutingModule,
   ],
