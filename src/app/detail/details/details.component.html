@@ -35,7 +35,14 @@
         maxlength="150"></textarea>
     </div>
 
-    <button class="addComment">Add Comment</button>
+    <button class="addComment" *ngIf="userService.isLoggedIn(); else notLoggedInMessage">Add Comment</button>
+
+    <ng-template #notLoggedInMessage>
+      <div class="not-logged-in-message">
+        <p>Please <a [routerLink]="['/auth/login']">log in</a> to add a comment. If you don't have an account, <a [routerLink]="['/auth/register']">register</a> first.</p>
+      </div>
+    </ng-template>
+
   </form>
 
 

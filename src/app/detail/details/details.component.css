@@ -141,4 +141,14 @@ textarea {
     text-decoration: none;
     cursor: pointer;
   }
+
+  .not-logged-in-message {
+    background-color: #f8d7da; /* Червен цвят */
+    color: #721c24; /* Бял цвят */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 30px;
+  }
   

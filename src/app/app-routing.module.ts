@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ErrorComponent } from './core/error/error.component';
+import { AuthActivate } from './guard/auth.avtivate';
 
 const routes: Routes = [
   {path:"home",component: HomeComponent},

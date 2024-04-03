@@ -5,6 +5,7 @@ import { Product } from '../../types/product';
 import { DetailService } from '../detail.service';
 import { Comments } from 'src/app/types/comments';
 import { NgForm } from '@angular/forms';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-details',
@@ -23,8 +24,12 @@ export class DetailsComponent implements OnInit{
   editingComment: Comments | null = null
   isAuthor: boolean |undefined
 
-  constructor(private apiService: ApiService,private activatedRoute: ActivatedRoute,private detailService: DetailService ) {
-  }
+  constructor(
+    private apiService: ApiService,
+    private activatedRoute: ActivatedRoute,
+    private detailService: DetailService, 
+    public userService: UserService 
+    ) {}
   
   ngOnInit(): void {
     this.userEmail = sessionStorage.getItem("email") ?? ""
@@ -44,7 +49,6 @@ export class DetailsComponent implements OnInit{
         this.productId = p["id"]
     })
    this.detailService.getAllComments(this.productId).subscribe((data) => {
-    console.log(data);
     
      this.filteredComments = data.filter(comment => comment.productId === this.productId).map(comment => {
       comment.isOwner = this.isOwner(comment.username);
