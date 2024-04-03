@@ -60,13 +60,16 @@ The following packages were used for this project:
 
 
 Clone this repository
-Navigate to the "client" folder
-Run "npm run dev"
 Navigate to the "softuni-practice-server-master" folder
+Run - npm i 
+Run - npm run client
+Run - npm run build 
 Run "cd ./dist/"
-Run "node server.js"
-Navigate to the "vitamins" folder
+Run - node server.js
+
+Navigate to the "Vitamnis" folder
 Run "ng serve"
+
 You can check here for more information about the configuration.
 
 Open http://localhost:4200/ and you should be ready.
